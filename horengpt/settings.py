@@ -126,8 +126,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT=BASE_DIR /'static'
+STATIC_ROOT=BASE_DIR /'staticfiles'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -135,17 +136,8 @@ if not DEBUG:
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-# STORAGES = {
-#     'staticfiles': {
-#         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-#         }
-# }
 
 
-
-# STATIC_URL = 'static/'
-
-# STATIC_ROOT=BASE_DIR /'static'
 STATICFILES_DIRS=[
     'horengpt/static',
 ]
