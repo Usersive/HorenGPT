@@ -27,5 +27,6 @@ urlpatterns = [
     path('horen/', include('horen.urls')),
     path('current_year', views.current_year, name='current_year'),
 ]
+
 urlpatterns +=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
