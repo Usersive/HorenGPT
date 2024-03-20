@@ -1,0 +1,138 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block content %}
+
+
+<div class="chat-container">   
+      <ul class="list-unstyled messages-list">  
+       
+        {%for chat in chats %}
+          {%if chat.user == request.user %}
+                <li class="message sent message-text">
+                  
+                    <div class="messege-sender">
+                     <strong> {{chat.user}}</strong>
+                    </div>
+                    <div class="message-content">
+                      {{chat.message}}
+                    </div> 
+                  
+                </li>
+
+                <li class="message received message-text">
+                  
+                    <div class="messege-sender">
+                      <strong>AI ChatBot</strong>
+                    </div>
+                    <div class="message-content">
+                      {{chat.response}}
+                    </div> 
+                  
+                </li>
+            
+            
+            {%endif%}
+          {%endfor%}
+          
+      </ul>
+
+
+  {% if user.is_authenticated %}
+ <form class="message-form">
+    {%csrf_token%}
+    <div class="input-group">
+      <input type="text" class="form-control message-input" placeholder="Type your message...">
+      <div class="input-group-append">
+        <button  type="submit" class="btn btn-primary btn-send">Send</button>
+        
+      </div>
+    </div>
+  </form>
+  {%else%}
+
+  <div class="default-text">
+    <h1><strong>ChatGPT Clone</strong></h1>
+    <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.</p>
+    <p><a  a href="{%url 'login'%}"> Click here to login </a></p>
+  </div>
+
+  {%endif%}
+ 
+</div>
+
+
+
+<script>
+
+  const messagesList = document.querySelector('.messages-list');
+  const messageForm = document.querySelector('.message-form');
+  const messageInput = document.querySelector('.message-input');
+  const chatContainer = document.querySelector('.chat-container');
+  
+  function scrollToTop(){
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+  }
+
+
+  messageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+   
+    const message = messageInput.value.trim();
+    if (message.length === 0) {
+      return;
+    }
+    const messageItem = document.createElement('li');
+    messageItem.classList.add('message', 'sent');
+    messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+                <b>{{request.user}}</b>
+            </div>
+            <div class="message-content">
+                ${message}
+            </div>
+        </div>`;
+    
+    messagesList.appendChild(messageItem);
+    scrollToTop();
+   
+
+    messageInput.value = '';
+   
+    fetch('', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+        'message': message
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const response = data.response;
+        const messageItem = document.createElement('li');
+        messageItem.classList.add('message', 'received');
+        messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+                ${response}
+            </div>
+        </div>
+          `;
+        messagesList.appendChild(messageItem);
+        scrollToTop();
+        
+        
+      });   
+  });
+
+</script>
+
+{%endblock%}
+
+
+
