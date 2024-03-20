@@ -152,7 +152,9 @@ if not DEBUG:
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-
+STATICFILES_DIRS =[
+    'horengpt/static',
+]
 #CLOUDINARY SETUP 
 
 CLOUDINARY_URL = config('CLOUDINARY_URL') 
@@ -163,9 +165,21 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('API_SECRET'),
 }
 
+DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.RawMediaCloudinaryStorage'
+MEDIA_URL = '/mycurriculum/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
+
+
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        }
+}
+
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR /'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
