@@ -131,7 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT=BASE_DIR /'static'
 STATIC_ROOT=BASE_DIR /'staticfiles'
-
+# STATIC_ROOT=BASE_DIR /'static'
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -139,9 +139,18 @@ if not DEBUG:
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-STATICFILES_DIRS =[
-    'horengpt/static',
+# STATICFILES_DIRS =[
+#     'horengpt/static',
+# ]
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '/static'),
 ]
+
+
+
+
 #CLOUDINARY SETUP 
 
 CLOUDINARY_URL = config('CLOUDINARY_URL') 
