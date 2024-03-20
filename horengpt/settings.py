@@ -36,20 +36,19 @@ ALLOWED_HOSTS = ['127.0.0.1', 'horengpt.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+   'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
     'horen',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    # 'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -129,8 +128,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT=BASE_DIR /'static'
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -140,9 +139,19 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        }
+}
+
+
+
+
 STATICFILES_DIRS=[
     'horengpt/static',
 ]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 # Default primary key field type
