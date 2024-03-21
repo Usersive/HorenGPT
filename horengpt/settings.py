@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.messages',
     'horen',
-    'cloudinary_storage',
-    'cloudinary',
+#     'cloudinary_storage',
+#     'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -130,10 +130,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT=BASE_DIR /'static'
-# STATIC_ROOT=BASE_DIR /'staticfiles'
+
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
+
+# STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles')
+
+
+STATIC_ROOT=BASE_DIR /'static'
+STATIC_ROOT=BASE_DIR /'staticfiles'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -141,29 +146,25 @@ if not DEBUG:
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-# STATICFILES_DIRS =[
-#     'horengpt/static',
-# ]
-
-
-STATICFILES_DIRS = [BASE_DIR, '/static']
-
+STATICFILES_DIRS =[
+    '/static',
+]
 
 
 
 #CLOUDINARY SETUP 
 
-CLOUDINARY_URL = config('CLOUDINARY_URL') 
+# CLOUDINARY_URL = config('CLOUDINARY_URL') 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': config('CLOUD_NAME'),
+#     'API_KEY': config('API_KEY'),
+#     'API_SECRET': config('API_SECRET'),
+# }
 
-DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.RawMediaCloudinaryStorage'
-MEDIA_URL = '/mycurriculum/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.RawMediaCloudinaryStorage'
+# MEDIA_URL = '/mycurriculum/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
@@ -174,8 +175,8 @@ STORAGES = {
 }
 
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
