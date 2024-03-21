@@ -131,9 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT=BASE_DIR /'static'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATIC_ROOT=BASE_DIR /'static'
@@ -152,19 +152,19 @@ STATICFILES_DIRS =[
 
 
 
-#CLOUDINARY SETUP 
+# CLOUDINARY SETUP 
 
-# CLOUDINARY_URL = config('CLOUDINARY_URL') 
+CLOUDINARY_URL = config('CLOUDINARY_URL') 
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': config('CLOUD_NAME'),
-#     'API_KEY': config('API_KEY'),
-#     'API_SECRET': config('API_SECRET'),
-# }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
 
-# DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.RawMediaCloudinaryStorage'
-# MEDIA_URL = '/mycurriculum/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
+DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.RawMediaCloudinaryStorage'
+MEDIA_URL = '/mycurriculum/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
