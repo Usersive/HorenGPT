@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('fakeadmin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('horenadmin/', admin.site.urls),
     path('', views.index, name='index'),
     path('horen/', include('horen.urls')),
     path('current_year', views.current_year, name='current_year'),
